@@ -180,7 +180,13 @@ defmodule Kronos do
   end
 
   @doc """
-  Rounds the given timestamp (`timestamp`) to the given type (`at`)
+  Rounds the given timestamp (`timestamp`) to the given type (`at`). 
+  
+  For example : 
+  -  truncate of 2017/10/24 23:12:07 at `minute` gives : 2017/10/24 23:12:00
+  -  truncate of 2017/10/24 23:12:07 at `hour` gives : 2017/10/24 23:00:00
+  -  truncate of 2017/10/24 23:12:07 at `day` gives : 2017/10/24 00:00:00
+
   """
   @spec truncate(t, [at: Mizur.metric_type]) :: t
   def truncate({base, _} = timestamp, at: {__MODULE__, unit, _, _, _} = _type) do 
