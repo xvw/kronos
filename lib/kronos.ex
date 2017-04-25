@@ -18,9 +18,27 @@ defmodule Kronos do
     }, float
   }
 
-  use Mizur.System
+  @typedoc """
+  This type represents a triplet of non negative values
+  """
+  @type non_neg_triplet :: {
+    non_neg_integer, 
+    non_neg_integer, 
+    non_neg_integer
+  }
+
+  @typedoc """
+  This type represents a couple date-time
+  """
+  @type datetime_t :: {
+    non_neg_triplet, 
+    non_neg_triplet
+  }
+
 
   # Definition of the Metric-System
+
+  use Mizur.System
 
   type second
   type minute = 60 * second
@@ -32,6 +50,23 @@ defmodule Kronos do
   """
   @spec new(number()) :: t
   def new(timestamp), do: second(timestamp)
+
+
+  @doc """
+  Converts a `Kronos.datetime_t` to a `Kronos.t`
+  """
+  @spec new!(datetime_t) :: t 
+  def new!(erl_tuple) do 
+    erl_tuple
+    |> NaiveDateTime.from_erl!()
+    |> from_naive!()
+  end
+
+  @doc """
+  Converts a couple of `Kronos.non_neg_triplet` to a `Kronos.t`
+  """
+  @spec new!(non_neg_triplet, non_neg_triplet) :: t 
+  def new!(date, time), do: new!({date, time})
 
   @doc """
   Returns the current timestamp (in a `Kronos.t`)
@@ -102,5 +137,18 @@ defmodule Kronos do
     |> DateTime.to_unix(:second)
     |> second()
   end
+
+  @doc """
+  Converts a `NaiveDateTime.t` into a `Kronos.t`. The function 
+  raise an Raise an `ArgumentError` if the naive datetime is not 
+  valid.
+  """
+  @spec from_naive!(NaiveDateTime.t) :: t 
+  def from_naive!(naive, timezone \\ "Etc/UTC") do 
+    naive 
+    |> DateTime.from_naive!(timezone)
+    |> from_datetime()
+  end
+  
 
 end
