@@ -20,7 +20,7 @@ defmodule Kronos do
 
   use Mizur.System
 
-  # Definition of the Metric System
+  # Definition of the Metric-System
 
   type second
   type minute = 60 * second
@@ -62,21 +62,45 @@ defmodule Kronos do
   @doc """
   Converts a `Kronos.t` to a `DateTime.t`, the result is wrapped 
   into `{:ok, value}` or `{:error, reason}`.
+
+      iex> ts = 1493119897
+      ...> a  = Kronos.new(ts)
+      ...> b  = DateTime.from_unix(1493119897)
+      ...> Kronos.to_datetime(a) == b 
+      true
   """
   @spec to_datetime(t) :: {:ok, DateTime.t} | {:error, atom}
-  def to_datetime(timestamp) do 
-    to_integer(timestamp)
+  def to_datetime(timestamp) do
+    timestamp 
+    |> to_integer()
     |> DateTime.from_unix(:second)
   end
 
   @doc """
   Converts a `Kronos.t` to a `DateTime.t`. Raise an `ArgumentError` if 
   the timestamp is not valid.
+
+      iex> ts = 1493119897
+      ...> a  = Kronos.new(ts)
+      ...> b  = DateTime.from_unix!(1493119897)
+      ...> Kronos.to_datetime!(a) == b 
+      true
   """
   @spec to_datetime!(t) :: DateTime.t
   def to_datetime!(timestamp) do
-    to_integer(timestamp)
+    timestamp
+    |>to_integer()
     |> DateTime.from_unix!(:second)
+  end
+
+  @doc """
+  Converts a `DateTime.t` into a `Kronos.t`
+  """
+  @spec from_datetime(DateTime.t) :: t 
+  def from_datetime(datetime) do
+    datetime 
+    |> DateTime.to_unix(:second)
+    |> second()
   end
 
 end
