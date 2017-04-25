@@ -183,9 +183,9 @@ defmodule Kronos do
   def truncate({base, _} = date, at: {__MODULE__, unit, _, _, _}) do 
     # To be fixed for negative TimeStamp
     seconds = to_integer(date)
-    factor  =  to_integer(apply(__MODULE__, unit, [1]))
-    #f = if (seconds >= 0), do: 1, else: -1
-    (seconds - rem(seconds, factor))
+    factor  = to_integer(apply(__MODULE__, unit, [1]))
+    f = if (seconds >= 0), do: 0, else: factor
+    (seconds - rem(seconds, factor) - f)
     |> second() 
     |> Mizur.from(to: base)
   end

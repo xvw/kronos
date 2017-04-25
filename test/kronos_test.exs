@@ -22,7 +22,7 @@ defmodule KronosTest do
 
     use Mizur.Infix, only: [+: 2]
     t = Kronos.new!(@ts) + Kronos.day(2) + Kronos.minute(12)
-    
+
     m =
       @dt 
       |> Map.put(:day, day)
@@ -31,5 +31,13 @@ defmodule KronosTest do
     assert Kronos.to_datetime!(t) == m
 
   end
+
+
+  test "Truncate" do 
+    t = Kronos.new!(-@ts)
+    r = Kronos.truncate(t, at: Kronos.minute)
+    IO.inspect [Kronos.to_string(t), Kronos.to_string(r)]
+  end
+  
 
 end
