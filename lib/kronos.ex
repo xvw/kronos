@@ -2,21 +2,15 @@ defmodule Kronos do
 
   @moduledoc """
   Kronos is a tool to facilitate the manipulation of dates (via Timestamps).
+  This library use the seconds as a reference. The API does not use 
+  microsecond.
   """
 
 
   @typedoc """
   This type represents a typed timestamp
   """
-  @type t :: {
-    {
-      Kronos, 
-      (:second | :minute | :hour | :day),
-      true,
-      (number -> float),
-      (number -> float)
-    }, float
-  }
+  @type t :: Mizur.typed_value
 
   @typedoc """
   This type represents a triplet of non negative values
@@ -35,6 +29,11 @@ defmodule Kronos do
     non_neg_triplet
   }
 
+  @typedoc """
+  This type represents a failable result
+  """
+  @type result :: {:ok, t} | {:error, atom}
+
 
   # Definition of the Metric-System
 
@@ -46,27 +45,55 @@ defmodule Kronos do
   type day    = 24 * 60 * 60 * second
 
   @doc """
-  Converts a number to a `Kronos.t`
+  Converts an integer (timestamp) to a `Kronos.result`
   """
-  @spec new(number()) :: t
-  def new(timestamp), do: second(timestamp)
-
-
-  @doc """
-  Converts a `Kronos.datetime_t` to a `Kronos.t`
-  """
-  @spec new!(datetime_t) :: t 
-  def new!(erl_tuple) do 
-    erl_tuple
-    |> NaiveDateTime.from_erl!()
-    |> from_naive!()
+  @spec new(integer) :: result
+  def new(timestamp) when is_integer(timestamp) do 
+    case DateTime.from_unix(timestamp) do 
+      {:ok, _datetime} -> {:ok, second(timestamp)}
+      {:error, reason } -> {:error, reason}
+    end
   end
 
   @doc """
-  Converts a couple of `Kronos.non_neg_triplet` to a `Kronos.t`
+  Converts an erlang datetime representation to a `Kronos.result`
+  """
+  @spec new(datetime_t) :: result 
+  def new({{_, _, _}, {_, _, _}} = erl_tuple) do 
+    case NaiveDateTime.from_erl(erl_tuple) do
+      {:error, reason1} -> {:error, reason1} 
+      {:ok, naive} -> 
+        {:ok, result} = DateTime.from_naive(naive, "Etc/UTC")
+        from_datetime(result)
+    end
+  end
+
+  @doc """
+  Converts two tuple (date, time) to a `Kronos.result`
+  """
+  @spec new(non_neg_triplet, non_neg_triplet) :: result 
+  def new({_, _, _} = date, {_, _, _} = time), do: new({date, time})
+
+  @doc """
+  Same of `Kronos.new/1` but raise an `ArgumentError` if the 
+  timestamp creation failed.
+  """
+  @spec new!(integer | datetime_t) :: t
+  def new!(input) do 
+    case new(input) do 
+      {:ok, result} -> result
+      {:error, reason} ->
+        raise ArgumentError, message: "Invalid argument, #{reason}"
+    end
+  end
+
+  @doc """
+  Same of `Kronos.new/2` but raise an `ArgumentError` if the 
+  timestamp creation failed.
   """
   @spec new!(non_neg_triplet, non_neg_triplet) :: t 
   def new!(date, time), do: new!({date, time})
+  
 
   @doc """
   Returns the current timestamp (in a `Kronos.t`)
@@ -83,7 +110,7 @@ defmodule Kronos do
   integer in `second`. This function is mainly used to convert 
   `Kronos.t` to` DateTime.t`.
 
-      iex> x = Kronos.new(2000)
+      iex> x = Kronos.new!(2000)
       ...> Kronos.to_integer(x)
       2000
 
@@ -99,7 +126,7 @@ defmodule Kronos do
   into `{:ok, value}` or `{:error, reason}`.
 
       iex> ts = 1493119897
-      ...> a  = Kronos.new(ts)
+      ...> a  = Kronos.new!(ts)
       ...> b  = DateTime.from_unix(1493119897)
       ...> Kronos.to_datetime(a) == b 
       true
@@ -116,7 +143,7 @@ defmodule Kronos do
   the timestamp is not valid.
 
       iex> ts = 1493119897
-      ...> a  = Kronos.new(ts)
+      ...> a  = Kronos.new!(ts)
       ...> b  = DateTime.from_unix!(1493119897)
       ...> Kronos.to_datetime!(a) == b 
       true
@@ -138,17 +165,5 @@ defmodule Kronos do
     |> second()
   end
 
-  @doc """
-  Converts a `NaiveDateTime.t` into a `Kronos.t`. The function 
-  raise an Raise an `ArgumentError` if the naive datetime is not 
-  valid.
-  """
-  @spec from_naive!(NaiveDateTime.t) :: t 
-  def from_naive!(naive, timezone \\ "Etc/UTC") do 
-    naive 
-    |> DateTime.from_naive!(timezone)
-    |> from_datetime()
-  end
-  
 
 end
