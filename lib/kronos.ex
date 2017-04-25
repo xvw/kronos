@@ -2,8 +2,9 @@ defmodule Kronos do
 
   @moduledoc """
   Kronos is a tool to facilitate the manipulation of dates (via Timestamps).
-  This library use the seconds as a reference. The API does not use 
-  microsecond.
+  This library use the seconds as a reference. 
+  
+  **The API does not use microsecond.**
   """
 
 
@@ -179,9 +180,11 @@ defmodule Kronos do
   end
 
   @doc """
+  Rounds the given timestamp (`timestamp`) to the given type (`at`)
   """
-  def truncate({base, _} = date, at: {__MODULE__, unit, _, _, _}) do 
-    seconds = to_integer(date)
+  @spec truncate(t, [at: Mizur.metric_type]) :: t
+  def truncate({base, _} = timestamp, at: {__MODULE__, unit, _, _, _} = _type) do 
+    seconds = to_integer(timestamp)
     factor  = to_integer(apply(__MODULE__, unit, [1]))
     f = if (seconds >= 0), do: 0, else: factor
     (seconds - rem(seconds, factor) - f)
