@@ -1,4 +1,4 @@
-> Work in progress
+> This library is Work in progress
 
 
 # Kronos
