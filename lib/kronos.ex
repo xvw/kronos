@@ -44,6 +44,19 @@ defmodule Kronos do
   type hour   = 60 * 60 * second
   type day    = 24 * 60 * 60 * second
 
+
+  @doc """
+  Convert a `Kronos.t` into a string, use the 
+  `DateTime` inspect.
+  """
+  @spec to_string(t) :: String.t
+  def to_string(value) do 
+    case to_datetime(value) do 
+      {:error, reason} -> "Invalid[#{reason}]"
+      {:ok, datetime}  -> "#{datetime}"
+    end
+  end
+
   @doc """
   Converts an integer (timestamp) to a `Kronos.result`
   """
@@ -163,6 +176,17 @@ defmodule Kronos do
     datetime 
     |> DateTime.to_unix(:second)
     |> second()
+  end
+
+  @doc """
+  """
+  def truncate({base, _} = date, at: {__MODULE__, unit, _, _, _}) do 
+    seconds = to_integer(date)
+    factor  =  to_integer(apply(__MODULE__, unit, [1]))
+    f = if (seconds >= 0), do: 1, else: -1
+    (seconds - rem(seconds, factor))
+    |> second() 
+    |> Mizur.from(to: base)
   end
 
 
