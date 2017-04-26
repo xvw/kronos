@@ -78,7 +78,7 @@ defmodule Kronos do
       {:error, reason1} -> {:error, reason1} 
       {:ok, naive} -> 
         {:ok, result} = DateTime.from_naive(naive, "Etc/UTC")
-        from_datetime(result)
+        {:ok, from_datetime(result)}
     end
   end
 
@@ -186,6 +186,10 @@ defmodule Kronos do
   -  truncate of 2017/10/24 23:12:07 at `minute` gives : 2017/10/24 23:12:00
   -  truncate of 2017/10/24 23:12:07 at `hour` gives : 2017/10/24 23:00:00
   -  truncate of 2017/10/24 23:12:07 at `day` gives : 2017/10/24 00:00:00
+
+      iex> ts = Kronos.new!({2017, 10, 24}, {23, 12, 07})
+      ...> Kronos.truncate(ts, at: Kronos.hour())
+      Kronos.new!({2017, 10, 24}, {23, 0, 0})
 
   """
   @spec truncate(t, [at: Mizur.metric_type]) :: t

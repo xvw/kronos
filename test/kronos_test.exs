@@ -34,9 +34,7 @@ defmodule KronosTest do
 
 
   test "Truncate" do 
-    t = Kronos.new!(-@ts)
-    r = Kronos.truncate(t, at: Kronos.minute)
-    IO.inspect [Kronos.to_string(t), Kronos.to_string(r)]
+
   end
   
 
