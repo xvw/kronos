@@ -8,7 +8,7 @@ defmodule Kronos.Mixfile do
       elixir: "~> 1.4",
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
-      name: "Mizur",
+      name: "Kronos",
       source_url: "https://github.com/xvw/kronos",
       homepage_url: "https://github.com/xvw/kronos",
       deps: deps()

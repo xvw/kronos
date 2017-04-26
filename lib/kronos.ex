@@ -180,16 +180,69 @@ defmodule Kronos do
   end
 
   @doc """
+  `Kronos.after?(a, b)` check if `a` is later in time than `b`.
+
+      iex> {a, b} = {Kronos.new!(2), Kronos.new!(1)}
+      ...> Kronos.after?(a, b)
+      true
+
+  You can specify a `precision`, to ignore minutes, hours or days. 
+  (By passing a `precision`, both parameters will be truncated via 
+  `Kronos.truncate/2`).
+  """
+  @spec after?(t, t, Mizur.metric_type) :: boolean
+  def after?(a, b, precision \\ second()) do 
+    use Mizur.Infix, only: [>: 2]
+    truncate(a, at: precision) > truncate(b, at: precision)
+  end
+
+  @doc """
+  `Kronos.before?(a, b)` check if `a` is earlier in time than `b`.
+
+      iex> {a, b} = {Kronos.new!(2), Kronos.new!(1)}
+      ...> Kronos.before?(b, a)
+      true
+
+  You can specify a `precision`, to ignore minutes, hours or days. 
+  (By passing a `precision`, both parameters will be truncated via 
+  `Kronos.truncate/2`).
+  """
+  @spec before?(t, t, Mizur.metric_type) :: boolean
+  def before?(a, b, precision \\ second()) do 
+    use Mizur.Infix, only: [<: 2]
+    truncate(a, at: precision) < truncate(b, at: precision)
+  end
+
+
+  @doc """
+  `Kronos.equivalent?(a, b)` check if `a` is at the same moment of `b`.
+
+      iex> {a, b} = {Kronos.new!(2), Kronos.new!(1)}
+      ...> Kronos.equivalent?(b, a, Kronos.hour())
+      true
+
+  You can specify a `precision`, to ignore minutes, hours or days. 
+  (By passing a `precision`, both parameters will be truncated via 
+  `Kronos.truncate/2`).
+  """
+  @spec equivalent?(t, t, Mizur.metric_type) :: boolean
+  def equivalent?(a, b, precision \\ second()) do 
+    use Mizur.Infix, only: [==: 2]
+    truncate(a, at: precision) == truncate(b, at: precision)
+  end
+
+
+  @doc """
   Rounds the given timestamp (`timestamp`) to the given type (`at`). 
+
+      iex> ts = Kronos.new!({2017, 10, 24}, {23, 12, 07})
+      ...> Kronos.truncate(ts, at: Kronos.hour())
+      Kronos.new!({2017, 10, 24}, {23, 0, 0})
   
   For example : 
   -  truncate of 2017/10/24 23:12:07 at `minute` gives : 2017/10/24 23:12:00
   -  truncate of 2017/10/24 23:12:07 at `hour` gives : 2017/10/24 23:00:00
   -  truncate of 2017/10/24 23:12:07 at `day` gives : 2017/10/24 00:00:00
-
-      iex> ts = Kronos.new!({2017, 10, 24}, {23, 12, 07})
-      ...> Kronos.truncate(ts, at: Kronos.hour())
-      Kronos.new!({2017, 10, 24}, {23, 0, 0})
 
   """
   @spec truncate(t, [at: Mizur.metric_type]) :: t
