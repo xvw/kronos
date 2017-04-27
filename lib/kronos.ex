@@ -124,7 +124,30 @@ defmodule Kronos do
       Mizur.Range.new(Kronos.new!(1), Kronos.new!(100))
   """
   @spec laps(t, t) :: duration
-  def laps(a, b), do: Mizur.Range.new(a, b) 
+  def laps(a, b), do: Mizur.Range.new(a, b)
+
+  @doc """
+  Check if a `Kronos.t` is include into a `Kronos.duration`.
+
+      iex> duration = KronosTest.mock(:duration, 2017, 2018)
+      ...> a = KronosTest.mock(:day, 2015, 12, 10)
+      ...> b = KronosTest.mock(:day, 2017, 5, 10)
+      ...> {Kronos.include?(a, in: duration), Kronos.include?(b, in: duration)}
+      {false, true}
+  """
+  @spec include?(t, [in: duration]) :: boolean
+  def include?(a, in: b), do: Mizur.Range.include?(a, in: b)
+
+  @doc """
+  Checks that two durations have an intersection.
+
+      iex> durationA = KronosTest.mock(:duration, 2016, 2018)
+      ...> durationB = KronosTest.mock(:duration, 2017, 2019)
+      ...> Kronos.overlap?(durationA, with: durationB)
+      true
+  """
+  @spec overlap?(duration, [with: duration]) :: boolean 
+  def overlap?(a, with: b), do: Mizur.Range.overlap?(a, b)
 
   @doc """
   Creates a duration between two `Kronos.t`. This duration 

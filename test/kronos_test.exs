@@ -6,6 +6,17 @@ defmodule KronosTest do
   @ts 1493158875
   @dt DateTime.from_unix!(@ts)
 
+
+  def mock(:day, year, month, day) do 
+    Kronos.new!({year, month, day}, {0, 0, 0})
+  end
+
+  def mock(:duration, year1, year2) do 
+    a = Kronos.new!({year1, 1, 1}, {0, 0, 0})
+    b = Kronos.new!({year2, 1, 1}, {0, 0, 0})
+    Kronos.laps(from: a, to: b)
+  end
+
   test "Kronos.t creation" do
     {:ok, t} = Kronos.new(@ts)
     assert Kronos.to_datetime!(t) == @dt
