@@ -34,7 +34,7 @@ defmodule Kronos.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:mizur, "~> 0.1.3"},
+      {:mizur, "~> 1.0.0"},
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
       {:ex_doc, "~> 0.14", only: :dev, runtime: false}
     ]
