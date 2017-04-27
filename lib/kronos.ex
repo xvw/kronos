@@ -309,4 +309,19 @@ defmodule Kronos do
   end
 
 
+  @doc """
+  Returns the difference (always positive) between to members 
+  of a duration.
+
+      iex> duration = KronosTest.mock(:duration, 2017, 2018)
+      ...> Mizur.from((Kronos.diff(duration)), to: Kronos.day)
+      Kronos.day(365)
+  """
+  @spec diff(duration) :: Mizur.typed_value 
+  def diff(duration) do 
+    {a, b} = Mizur.Range.sort(duration)
+    Mizur.sub(b, a)
+  end
+
+
 end
