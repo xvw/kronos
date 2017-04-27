@@ -7,6 +7,8 @@ defmodule Kronos do
   **The API does not use microsecond.**
   """
 
+  @first_day_of_week 4
+
 
   @typedoc """
   This type represents a typed timestamp
@@ -344,7 +346,7 @@ defmodule Kronos do
   Jump to the pred value of a `type`. For example 
   `next(Kronos.day, of: Kronos.new({2017, 10, 10}, {22, 12, 12}))` give the 
   date : `2017-10-09, 0:0:0`.
-  
+
       iex> t = KronosTest.mock(:day, 2017, 10, 10)
       ...> Kronos.pred(Kronos.day, of: t)
       KronosTest.mock(:day, 2017, 10, 9)
@@ -355,6 +357,16 @@ defmodule Kronos do
     Mizur.sub(ts, one)
     |> truncate(at: t)
   end
+
+  @spec day_of_week(t) :: non_neg_integer
+  def day_of_week(ts) do 
+    ts
+    |> truncate(at: day())
+    |> to_integer()
+    |> Kernel.+(@first_day_of_week)
+    |> rem(7)
+  end
+  
 
 
 end
