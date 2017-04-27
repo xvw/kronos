@@ -358,6 +358,21 @@ defmodule Kronos do
     |> truncate(at: t)
   end
 
+
+  @doc """ TO BE FIXED
+  Returns the day of the week from a `Kronos.t`. 
+  0 for Monday, 6 for Sunday.
+
+      iex> a = KronosTest.mock(:day, 1970, 1, 1, 12, 10, 11)
+      ...> Kronos.day_of_week(a)
+      4
+
+      iex> a = KronosTest.mock(:day, 2017, 4, 27, 0, 3, 11)
+      ...> Kronos.day_of_week(a)
+      4
+
+
+  """
   @spec day_of_week(t) :: non_neg_integer
   def day_of_week(ts) do 
     ts

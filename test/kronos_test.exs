@@ -11,6 +11,10 @@ defmodule KronosTest do
     Kronos.new!({year, month, day}, {0, 0, 0})
   end
 
+  def mock(:day, year, month, day, h, m, s) do 
+    Kronos.new!({year, month, day}, {h, m, s})
+  end
+
   def mock(:duration, year1, year2) do 
     a = Kronos.new!({year1, 1, 1}, {0, 0, 0})
     b = Kronos.new!({year2, 1, 1}, {0, 0, 0})
