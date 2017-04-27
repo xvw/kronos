@@ -1,4 +1,4 @@
 %{"dialyxir": {:hex, :dialyxir, "0.5.0", "5bc543f9c28ecd51b99cc1a685a3c2a1a93216990347f259406a910cf048d1d7", [:mix], []},
   "earmark": {:hex, :earmark, "1.2.0", "bf1ce17aea43ab62f6943b97bd6e3dc032ce45d4f787504e3adf738e54b42f3a", [:mix], []},
   "ex_doc": {:hex, :ex_doc, "0.15.1", "d5f9d588fd802152516fccfdb96d6073753f77314fcfee892b15b6724ca0d596", [:mix], [{:earmark, "~> 1.1", [hex: :earmark, optional: false]}]},
-  "mizur": {:hex, :mizur, "1.0.0", "2a80ea5a3b49f2cf32322af8f06d58b5ff16df0a3035968e5c0b578c12d2a4a4", [:mix], []}}
+  "mizur": {:hex, :mizur, "1.0.1", "e78361e46248264a29624b40882d6e10b66b380aaef52dc7ace20d07b64b0acf", [:mix], []}}

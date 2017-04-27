@@ -20,7 +20,7 @@ defmodule KronosTest do
     day = @dt.day + 2
     min = @dt.minute + 12
 
-    use Mizur.Infix, only: [+: 2]
+    use Kronos.Infix, only: [+: 2]
     t = Kronos.new!(@ts) + Kronos.day(2) + Kronos.minute(12)
 
     m =

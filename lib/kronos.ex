@@ -12,6 +12,11 @@ defmodule Kronos do
   This type represents a typed timestamp
   """
   @type t :: Mizur.typed_value
+  
+  @typedoc """
+  This type represents a range between two timestamp
+  """
+  @type duration :: Mizur.Range.range
 
   @typedoc """
   This type represents a triplet of non negative values
@@ -107,6 +112,31 @@ defmodule Kronos do
   """
   @spec new!(non_neg_triplet, non_neg_triplet) :: t 
   def new!(date, time), do: new!({date, time})
+
+
+  @doc """
+  Creates a duration between two `Kronos.t`. This duration 
+  is a `Mizur.Range.range`.
+
+      iex> a = Kronos.new!(1)
+      ...> b = Kronos.new!(100)
+      ...> Kronos.laps(a, b)
+      Mizur.Range.new(Kronos.new!(1), Kronos.new!(100))
+  """
+  @spec laps(t, t) :: duration
+  def laps(a, b), do: Mizur.Range.new(a, b) 
+
+  @doc """
+  Creates a duration between two `Kronos.t`. This duration 
+  is a `Mizur.Range.range`.
+
+      iex> a = Kronos.new!(1)
+      ...> b = Kronos.new!(100)
+      ...> [from: a, to: b] |> Kronos.laps
+      Mizur.Range.new(Kronos.new!(1), Kronos.new!(100))
+  """
+  @spec laps([from: t, to: t]) :: duration
+  def laps(from: a, to: b), do: laps(a, b)
   
 
   @doc """
