@@ -317,10 +317,43 @@ defmodule Kronos do
       ...> Mizur.from((Kronos.diff(duration)), to: Kronos.day)
       Kronos.day(365)
   """
-  @spec diff(duration) :: Mizur.typed_value 
+  @spec diff(duration) :: t
   def diff(duration) do 
     {a, b} = Mizur.Range.sort(duration)
     Mizur.sub(b, a)
+  end
+
+  @doc """
+  Jump to the next value of a `type`. For example 
+  `next(Kronos.day, of: Kronos.new({2017, 10, 10}, {22, 12, 12}))` give the 
+  date : `2017-10-11, 0:0:0`.
+
+      iex> t = KronosTest.mock(:day, 2017, 10, 10)
+      ...> Kronos.next(Kronos.day, of: t)
+      KronosTest.mock(:day, 2017, 10, 11)
+  """
+  @spec next(Mizur.metric_type, [of: t]) :: t
+  def next({mod, n, _, _, _} = t, of: ts) do 
+    one = apply(mod, n, [1])
+    Mizur.add(ts, one)
+    |> truncate(at: t)
+  end
+
+
+   @doc """
+  Jump to the pred value of a `type`. For example 
+  `next(Kronos.day, of: Kronos.new({2017, 10, 10}, {22, 12, 12}))` give the 
+  date : `2017-10-09, 0:0:0`.
+  
+      iex> t = KronosTest.mock(:day, 2017, 10, 10)
+      ...> Kronos.pred(Kronos.day, of: t)
+      KronosTest.mock(:day, 2017, 10, 9)
+  """
+  @spec pred(Mizur.metric_type, [of: t]) :: t
+  def pred({mod, n, _, _, _} = t, of: ts) do 
+    one = apply(mod, n, [1])
+    Mizur.sub(ts, one)
+    |> truncate(at: t)
   end
 
 
