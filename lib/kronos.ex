@@ -51,6 +51,7 @@ defmodule Kronos do
   type minute = 60 * second
   type hour   = 60 * 60 * second
   type day    = 24 * 60 * 60 * second
+  type week   = 7 * 24 * 60 * 60 * second
 
 
   @doc """
