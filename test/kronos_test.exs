@@ -48,8 +48,21 @@ defmodule KronosTest do
   end
 
 
-  test "Truncate" do 
-
+  test "For Day of week" do 
+    a = mock(:day, 2017, 5, 6)  # 5
+    b = mock(:day, 2017, 2, 13) # 0 
+    c = mock(:day, 2002, 9, 15) # 6
+    d = mock(:day, 1989, 11, 3) # 4 
+    e = mock(:day, 2026, 12, 9) # 2
+    f = mock(:day, 2029, 6, 5)  # 1
+    g = mock(:day, 1970, 1, 1)  # 3
+    assert Kronos.day_of_week(a) == 5
+    assert Kronos.day_of_week(b) == 0
+    assert Kronos.day_of_week(c) == 6
+    assert Kronos.day_of_week(d) == 4
+    assert Kronos.day_of_week(e) == 2
+    assert Kronos.day_of_week(f) == 1
+    assert Kronos.day_of_week(g) == 3
   end
   
 

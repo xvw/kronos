@@ -7,7 +7,7 @@ defmodule Kronos do
   **The API does not use microsecond.**
   """
 
-  @first_day_of_week 4
+  @first_day_of_week 3
 
 
   @typedoc """
@@ -359,17 +359,17 @@ defmodule Kronos do
   end
 
 
-  @doc """ TO BE FIXED
+  @doc """ 
   Returns the day of the week from a `Kronos.t`. 
   0 for Monday, 6 for Sunday.
 
       iex> a = KronosTest.mock(:day, 1970, 1, 1, 12, 10, 11)
       ...> Kronos.day_of_week(a)
-      4
+      3
 
-      iex> a = KronosTest.mock(:day, 2017, 4, 27, 0, 3, 11)
+      iex> a = KronosTest.mock(:day, 2017, 4, 29, 0, 3, 11)
       ...> Kronos.day_of_week(a)
-      4
+      5
 
 
   """
@@ -377,7 +377,9 @@ defmodule Kronos do
   def day_of_week(ts) do 
     ts
     |> truncate(at: day())
-    |> to_integer()
+    |> Mizur.from(to: day())
+    |> Mizur.unwrap()
+    |> round()
     |> Kernel.+(@first_day_of_week)
     |> rem(7)
   end
