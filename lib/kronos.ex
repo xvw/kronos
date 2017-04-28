@@ -4,7 +4,15 @@ defmodule Kronos do
   Kronos is a tool to facilitate the manipulation of dates (via Timestamps).
   This library use the seconds as a reference. 
   
-  **The API does not use microsecond.**
+
+      iex> import Kronos
+      ...> use Kronos.Infix
+      ...> {:ok, t} = new({2010, 12, 20}, {0, 0, 0})
+      ...> r = t + day(2) + hour(3) + minute(10) + second(13)
+      ...> Kronos.to_string(r)
+      "2010-12-22 03:10:13Z"
+
+
   """
 
   @first_day_of_week 3
