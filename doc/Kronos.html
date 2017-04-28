@@ -1,0 +1,1635 @@
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.15.1">
+    <title>Kronos – Kronos v0.1.0</title>
+    <link rel="stylesheet" href="dist/app-af302bfcc4.css" />
+    
+    <script src="dist/sidebar_items-51f734b023.js"></script>
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+
+    <div class="main">
+<button class="sidebar-toggle">
+  <i class="icon-menu"></i>
+</button>
+<section class="sidebar">
+
+  
+  <a href="api-reference.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        Kronos
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.1.0
+      </h2>
+    </div>
+    
+  </a>
+
+  <div class="sidebar-search">
+    <i class="icon-search"></i>
+    <input type="text" class="sidebar-searchInput" placeholder="search" autocomplete="off" />
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+
+    
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">Kronos v0.1.0</small>
+        Kronos
+        
+        
+          <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L1" title="View Source" class="view-source" rel="help">
+            <i class="icon-code"></i>
+          </a>
+        
+      </h1>
+
+      
+        <section id="moduledoc">
+          <p>Kronos is a tool to facilitate the manipulation of dates (via Timestamps).
+This library use the seconds as a reference. </p>
+<pre><code class="iex elixir">iex&gt; import Kronos
+...&gt; use Kronos.Infix
+...&gt; {:ok, t} = new({2010, 12, 20}, {0, 0, 0})
+...&gt; r = t + day(2) + hour(3) + minute(10) + second(13)
+...&gt; Kronos.to_string(r)
+&quot;2010-12-22 03:10:13Z&quot;</code></pre>
+
+        </section>
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <i class="icon-link"></i>
+            </a>
+            Summary
+          </h1>
+          
+  <div class="summary-types summary">
+    <h2>
+      <a href="#types">Types</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:datetime_t/0">datetime_t()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>This type represents a couple date-time</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:day_of_week/0">day_of_week()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>This type represents the day of the week</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:duration/0">duration()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>This type represents a range between two timestamp</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:non_neg_triplet/0">non_neg_triplet()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>This type represents a triplet of non negative values</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:result/0">result()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>This type represents a failable result</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:t/0">t()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>This type represents a typed timestamp</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#after?/3">after?(a, b, precision \\ second())</a>
+  </div>
+  
+    <div class="summary-synopsis"><p><code class="inline">Kronos.after?(a, b)</code> check if <code class="inline">a</code> is later in time than <code class="inline">b</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#before?/3">before?(a, b, precision \\ second())</a>
+  </div>
+  
+    <div class="summary-synopsis"><p><code class="inline">Kronos.before?(a, b)</code> check if <code class="inline">a</code> is earlier in time than <code class="inline">b</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#day/0">day()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>References the subtype <code class="inline">day</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#day/1">day(value)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Builds a value into the subtype <code class="inline">day</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#day_of_week/1">day_of_week(ts)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns the day of the week from a <code class="inline">Kronos.t</code>. 
+0 for Monday, 6 for Sunday</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#days_in/2">days_in(year, month)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns a <code class="inline">Kronos.t</code> with the number of days in a month, 
+the month is referenced by <code class="inline">year</code> and <code class="inline">month (non neg integer)</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#diff/1">diff(duration)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns the difference (always positive) between to members 
+of a duration</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#equivalent?/3">equivalent?(a, b, precision \\ second())</a>
+  </div>
+  
+    <div class="summary-synopsis"><p><code class="inline">Kronos.equivalent?(a, b)</code> check if <code class="inline">a</code> is at the same moment of <code class="inline">b</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#from_datetime/1">from_datetime(datetime)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Converts a <code class="inline">DateTime.t</code> into a <code class="inline">Kronos.t</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#hour/0">hour()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>References the subtype <code class="inline">hour</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#hour/1">hour(value)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Builds a value into the subtype <code class="inline">hour</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#include?/2">include?(a, list)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Check if a <code class="inline">Kronos.t</code> is include into a <code class="inline">Kronos.duration</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#laps/1">laps(list)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Creates a duration between two <code class="inline">Kronos.t</code>. This duration 
+is a <code class="inline">Mizur.Range.range</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#laps/2">laps(a, b)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Creates a duration between two <code class="inline">Kronos.t</code>. This duration 
+is a <code class="inline">Mizur.Range.range</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#leap_year?/1">leap_year?(year)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns if the given year is a leap year</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#minute/0">minute()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>References the subtype <code class="inline">minute</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#minute/1">minute(value)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Builds a value into the subtype <code class="inline">minute</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#new/1">new(timestamp)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Converts an erlang datetime representation to a <code class="inline">Kronos.result</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#new/2">new(date, time)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Converts two tuple (date, time) to a <code class="inline">Kronos.result</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#new!/1">new!(input)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Same of <a href="Kronos.html#new/1"><code class="inline">Kronos.new/1</code></a> but raise an <a href="https://hexdocs.pm/elixir/ArgumentError.html"><code class="inline">ArgumentError</code></a> if the 
+timestamp creation failed</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#new!/2">new!(date, time)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Same of <a href="Kronos.html#new/2"><code class="inline">Kronos.new/2</code></a> but raise an <a href="https://hexdocs.pm/elixir/ArgumentError.html"><code class="inline">ArgumentError</code></a> if the 
+timestamp creation failed</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#next/2">next(t, list)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Jump to the next value of a <code class="inline">type</code>. For example 
+<code class="inline">next(Kronos.day, of: Kronos.new({2017, 10, 10}, {22, 12, 12}))</code> give the 
+date : <code class="inline">2017-10-11, 0:0:0</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#now/0">now()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns the current timestamp (in a <code class="inline">Kronos.t</code>)</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#overlap?/2">overlap?(a, list)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Checks that two durations have an intersection</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#pred/2">pred(t, list)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Jump to the pred value of a <code class="inline">type</code>. For example 
+<code class="inline">next(Kronos.day, of: Kronos.new({2017, 10, 10}, {22, 12, 12}))</code> give the 
+date : <code class="inline">2017-10-09, 0:0:0</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#second/0">second()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>References the subtype <code class="inline">second</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#second/1">second(value)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Builds a value into the subtype <code class="inline">second</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#to_datetime/1">to_datetime(timestamp)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Converts a <code class="inline">Kronos.t</code> to a <code class="inline">DateTime.t</code>, the result is wrapped 
+into <code class="inline">{:ok, value}</code> or <code class="inline">{:error, reason}</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#to_datetime!/1">to_datetime!(timestamp)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Converts a <code class="inline">Kronos.t</code> to a <code class="inline">DateTime.t</code>. Raise an <a href="https://hexdocs.pm/elixir/ArgumentError.html"><code class="inline">ArgumentError</code></a> if 
+the timestamp is not valid</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#to_integer/1">to_integer(timestamp)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns the wrapped values (into a <code class="inline">Kronos.t</code>) as an 
+integer in <code class="inline">second</code>. This function is mainly used to convert 
+<code class="inline">Kronos.t</code> to<code class="inline">DateTime.t</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#to_string/1">to_string(value)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Convert a <code class="inline">Kronos.t</code> into a string, use the 
+<a href="https://hexdocs.pm/elixir/DateTime.html"><code class="inline">DateTime</code></a> inspect</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#truncate/2">truncate(timestamp, list)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Rounds the given timestamp (<code class="inline">timestamp</code>) to the given type (<code class="inline">at</code>)</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#week/0">week()</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>References the subtype <code class="inline">week</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#week/1">week(value)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Builds a value into the subtype <code class="inline">week</code></p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+        </section>
+      
+
+      
+        <section id="types" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#types">
+              <i class="icon-link"></i>
+            </a>
+            Types
+          </h1>
+          <div class="types-list">
+            <div class="detail" id="t:datetime_t/0">
+  
+  <div class="detail-header">
+    <a href="#t:datetime_t/0" class="detail-link" title="Link to this type">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">datetime_t()</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L52" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>datetime_t() :: {<a href="#t:non_neg_triplet/0">non_neg_triplet</a>, <a href="#t:non_neg_triplet/0">non_neg_triplet</a>}</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>This type represents a couple date-time</p>
+
+  </section>
+</div>
+<div class="detail" id="t:day_of_week/0">
+  
+  <div class="detail-header">
+    <a href="#t:day_of_week/0" class="detail-link" title="Link to this type">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">day_of_week()</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L65" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>day_of_week() :: :mon | :tue | :wed | :thu | :fri | :sat | :sun</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>This type represents the day of the week </p>
+
+  </section>
+</div>
+<div class="detail" id="t:duration/0">
+  
+  <div class="detail-header">
+    <a href="#t:duration/0" class="detail-link" title="Link to this type">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">duration()</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L38" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>duration() :: <a href="https://hexdocs.pm/mizur/1.0.1/Mizur.Range.html#t:range/0">Mizur.Range.range</a></pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>This type represents a range between two timestamp</p>
+
+  </section>
+</div>
+<div class="detail" id="t:non_neg_triplet/0">
+  
+  <div class="detail-header">
+    <a href="#t:non_neg_triplet/0" class="detail-link" title="Link to this type">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">non_neg_triplet()</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L43" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>non_neg_triplet() :: {non_neg_integer, non_neg_integer, non_neg_integer}</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>This type represents a triplet of non negative values</p>
+
+  </section>
+</div>
+<div class="detail" id="t:result/0">
+  
+  <div class="detail-header">
+    <a href="#t:result/0" class="detail-link" title="Link to this type">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">result()</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L60" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>result() :: {:ok, <a href="#t:t/0">t</a>} | {:error, atom}</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>This type represents a failable result</p>
+
+  </section>
+</div>
+<div class="detail" id="t:t/0">
+  
+  <div class="detail-header">
+    <a href="#t:t/0" class="detail-link" title="Link to this type">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">t()</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L33" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>t() :: <a href="https://hexdocs.pm/mizur/1.0.1/Mizur.html#t:typed_value/0">Mizur.typed_value</a></pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>This type represents a typed timestamp</p>
+
+  </section>
+</div>
+
+          </div>
+        </section>
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <i class="icon-link"></i>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="after?/3">
+  
+    <span id="after?/2" />
+  
+  <div class="detail-header">
+    <a href="#after?/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">after?(a, b, precision \\ second())</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L313" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>after?(<a href="#t:t/0">t</a>, <a href="#t:t/0">t</a>, <a href="https://hexdocs.pm/mizur/1.0.1/Mizur.html#t:metric_type/0">Mizur.metric_type</a>) :: boolean</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p><code class="inline">Kronos.after?(a, b)</code> check if <code class="inline">a</code> is later in time than <code class="inline">b</code>.</p>
+<pre><code class="iex elixir">iex&gt; {a, b} = {Kronos.new!(2), Kronos.new!(1)}
+...&gt; Kronos.after?(a, b)
+true</code></pre>
+<p>You can specify a <code class="inline">precision</code>, to ignore minutes, hours or days. 
+(By passing a <code class="inline">precision</code>, both parameters will be truncated via 
+<a href="Kronos.html#truncate/2"><code class="inline">Kronos.truncate/2</code></a>).</p>
+
+  </section>
+</div>
+<div class="detail" id="before?/3">
+  
+    <span id="before?/2" />
+  
+  <div class="detail-header">
+    <a href="#before?/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">before?(a, b, precision \\ second())</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L330" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>before?(<a href="#t:t/0">t</a>, <a href="#t:t/0">t</a>, <a href="https://hexdocs.pm/mizur/1.0.1/Mizur.html#t:metric_type/0">Mizur.metric_type</a>) :: boolean</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p><code class="inline">Kronos.before?(a, b)</code> check if <code class="inline">a</code> is earlier in time than <code class="inline">b</code>.</p>
+<pre><code class="iex elixir">iex&gt; {a, b} = {Kronos.new!(2), Kronos.new!(1)}
+...&gt; Kronos.before?(b, a)
+true</code></pre>
+<p>You can specify a <code class="inline">precision</code>, to ignore minutes, hours or days. 
+(By passing a <code class="inline">precision</code>, both parameters will be truncated via 
+<a href="Kronos.html#truncate/2"><code class="inline">Kronos.truncate/2</code></a>).</p>
+
+  </section>
+</div>
+<div class="detail" id="day/0">
+  
+  <div class="detail-header">
+    <a href="#day/0" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">day()</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L75" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>References the subtype <code class="inline">day</code></p>
+
+  </section>
+</div>
+<div class="detail" id="day/1">
+  
+  <div class="detail-header">
+    <a href="#day/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">day(value)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L75" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Builds a value into the subtype <code class="inline">day</code></p>
+
+  </section>
+</div>
+<div class="detail" id="day_of_week/1">
+  
+  <div class="detail-header">
+    <a href="#day_of_week/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">day_of_week(ts)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L441" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>day_of_week(<a href="#t:t/0">t</a>) :: <a href="#t:day_of_week/0">day_of_week</a></pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Returns the day of the week from a <code class="inline">Kronos.t</code>. 
+0 for Monday, 6 for Sunday.</p>
+<pre><code class="iex elixir">iex&gt; a = KronosTest.mock(:day, 1970, 1, 1, 12, 10, 11)
+...&gt; Kronos.day_of_week(a)
+:thu
+
+iex&gt; a = KronosTest.mock(:day, 2017, 4, 29, 0, 3, 11)
+...&gt; Kronos.day_of_week(a)
+:sat</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="days_in/2">
+  
+  <div class="detail-header">
+    <a href="#days_in/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">days_in(year, month)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L125" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>days_in(non_neg_integer, 1..12) :: <a href="#t:t/0">t</a></pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Returns a <code class="inline">Kronos.t</code> with the number of days in a month, 
+the month is referenced by <code class="inline">year</code> and <code class="inline">month (non neg integer)</code>.</p>
+<pre><code class="iex elixir">iex&gt; Kronos.days_in(2004, 2)
+Kronos.day(29)
+
+iex&gt; Kronos.days_in(2005, 2)
+Kronos.day(28)
+
+iex&gt; Kronos.days_in(2005, 1)
+Kronos.day(31)
+
+iex&gt; Kronos.days_in(2001, 4)
+Kronos.day(30)</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="diff/1">
+  
+  <div class="detail-header">
+    <a href="#diff/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">diff(duration)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L387" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>diff(<a href="#t:duration/0">duration</a>) :: <a href="#t:t/0">t</a></pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Returns the difference (always positive) between to members 
+of a duration.</p>
+<pre><code class="iex elixir">iex&gt; duration = KronosTest.mock(:duration, 2017, 2018)
+...&gt; Mizur.from((Kronos.diff(duration)), to: Kronos.day)
+Kronos.day(365)</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="equivalent?/3">
+  
+    <span id="equivalent?/2" />
+  
+  <div class="detail-header">
+    <a href="#equivalent?/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">equivalent?(a, b, precision \\ second())</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L348" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>equivalent?(<a href="#t:t/0">t</a>, <a href="#t:t/0">t</a>, <a href="https://hexdocs.pm/mizur/1.0.1/Mizur.html#t:metric_type/0">Mizur.metric_type</a>) :: boolean</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p><code class="inline">Kronos.equivalent?(a, b)</code> check if <code class="inline">a</code> is at the same moment of <code class="inline">b</code>.</p>
+<pre><code class="iex elixir">iex&gt; {a, b} = {Kronos.new!(2), Kronos.new!(1)}
+...&gt; Kronos.equivalent?(b, a, Kronos.hour())
+true</code></pre>
+<p>You can specify a <code class="inline">precision</code>, to ignore minutes, hours or days. 
+(By passing a <code class="inline">precision</code>, both parameters will be truncated via 
+<a href="Kronos.html#truncate/2"><code class="inline">Kronos.truncate/2</code></a>).</p>
+
+  </section>
+</div>
+<div class="detail" id="from_datetime/1">
+  
+  <div class="detail-header">
+    <a href="#from_datetime/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">from_datetime(datetime)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L295" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>from_datetime(<a href="https://hexdocs.pm/elixir/DateTime.html#t:t/0">DateTime.t</a>) :: <a href="#t:t/0">t</a></pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Converts a <code class="inline">DateTime.t</code> into a <code class="inline">Kronos.t</code></p>
+
+  </section>
+</div>
+<div class="detail" id="hour/0">
+  
+  <div class="detail-header">
+    <a href="#hour/0" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">hour()</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L74" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>References the subtype <code class="inline">hour</code></p>
+
+  </section>
+</div>
+<div class="detail" id="hour/1">
+  
+  <div class="detail-header">
+    <a href="#hour/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">hour(value)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L74" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Builds a value into the subtype <code class="inline">hour</code></p>
+
+  </section>
+</div>
+<div class="detail" id="include?/2">
+  
+  <div class="detail-header">
+    <a href="#include?/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">include?(a, list)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L205" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>include?(<a href="#t:t/0">t</a>, [{:in, <a href="#t:duration/0">duration</a>}]) :: boolean</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Check if a <code class="inline">Kronos.t</code> is include into a <code class="inline">Kronos.duration</code>.</p>
+<pre><code class="iex elixir">iex&gt; duration = KronosTest.mock(:duration, 2017, 2018)
+...&gt; a = KronosTest.mock(:day, 2015, 12, 10)
+...&gt; b = KronosTest.mock(:day, 2017, 5, 10)
+...&gt; {Kronos.include?(a, in: duration), Kronos.include?(b, in: duration)}
+{false, true}</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="laps/1">
+  
+  <div class="detail-header">
+    <a href="#laps/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">laps(list)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L228" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>laps([from: <a href="#t:t/0">t</a>, to: <a href="#t:t/0">t</a>]) :: <a href="#t:duration/0">duration</a></pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Creates a duration between two <code class="inline">Kronos.t</code>. This duration 
+is a <code class="inline">Mizur.Range.range</code>.</p>
+<pre><code class="iex elixir">iex&gt; a = Kronos.new!(1)
+...&gt; b = Kronos.new!(100)
+...&gt; [from: a, to: b] |&gt; Kronos.laps
+Mizur.Range.new(Kronos.new!(1), Kronos.new!(100))</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="laps/2">
+  
+  <div class="detail-header">
+    <a href="#laps/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">laps(a, b)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L193" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>laps(<a href="#t:t/0">t</a>, <a href="#t:t/0">t</a>) :: <a href="#t:duration/0">duration</a></pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Creates a duration between two <code class="inline">Kronos.t</code>. This duration 
+is a <code class="inline">Mizur.Range.range</code>.</p>
+<pre><code class="iex elixir">iex&gt; a = Kronos.new!(1)
+...&gt; b = Kronos.new!(100)
+...&gt; Kronos.laps(a, b)
+Mizur.Range.new(Kronos.new!(1), Kronos.new!(100))</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="leap_year?/1">
+  
+  <div class="detail-header">
+    <a href="#leap_year?/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">leap_year?(year)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L102" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>leap_year?(non_neg_integer) :: boolean</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Returns if the given year is a leap year.</p>
+<pre><code class="iex elixir">iex&gt; Kronos.leap_year?(2004)
+true 
+
+iex&gt; Kronos.leap_year?(2017)
+false</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="minute/0">
+  
+  <div class="detail-header">
+    <a href="#minute/0" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">minute()</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L73" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>References the subtype <code class="inline">minute</code></p>
+
+  </section>
+</div>
+<div class="detail" id="minute/1">
+  
+  <div class="detail-header">
+    <a href="#minute/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">minute(value)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L73" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Builds a value into the subtype <code class="inline">minute</code></p>
+
+  </section>
+</div>
+<div class="detail" id="new/1">
+  
+  <div class="detail-header">
+    <a href="#new/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">new(timestamp)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L134" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>new(integer) :: <a href="#t:result/0">result</a></pre>
+        
+          <pre>new(<a href="#t:datetime_t/0">datetime_t</a>) :: <a href="#t:result/0">result</a></pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Converts an erlang datetime representation to a <code class="inline">Kronos.result</code></p>
+
+  </section>
+</div>
+<div class="detail" id="new/2">
+  
+  <div class="detail-header">
+    <a href="#new/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">new(date, time)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L158" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>new(<a href="#t:non_neg_triplet/0">non_neg_triplet</a>, <a href="#t:non_neg_triplet/0">non_neg_triplet</a>) :: <a href="#t:result/0">result</a></pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Converts two tuple (date, time) to a <code class="inline">Kronos.result</code></p>
+
+  </section>
+</div>
+<div class="detail" id="new!/1">
+  
+  <div class="detail-header">
+    <a href="#new!/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">new!(input)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L167" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>new!(integer | <a href="#t:datetime_t/0">datetime_t</a>) :: <a href="#t:t/0">t</a></pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Same of <a href="Kronos.html#new/1"><code class="inline">Kronos.new/1</code></a> but raise an <a href="https://hexdocs.pm/elixir/ArgumentError.html"><code class="inline">ArgumentError</code></a> if the 
+timestamp creation failed.</p>
+
+  </section>
+</div>
+<div class="detail" id="new!/2">
+  
+  <div class="detail-header">
+    <a href="#new!/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">new!(date, time)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L180" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>new!(<a href="#t:non_neg_triplet/0">non_neg_triplet</a>, <a href="#t:non_neg_triplet/0">non_neg_triplet</a>) :: <a href="#t:t/0">t</a></pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Same of <a href="Kronos.html#new/2"><code class="inline">Kronos.new/2</code></a> but raise an <a href="https://hexdocs.pm/elixir/ArgumentError.html"><code class="inline">ArgumentError</code></a> if the 
+timestamp creation failed.</p>
+
+  </section>
+</div>
+<div class="detail" id="next/2">
+  
+  <div class="detail-header">
+    <a href="#next/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">next(t, list)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L402" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>next(<a href="https://hexdocs.pm/mizur/1.0.1/Mizur.html#t:metric_type/0">Mizur.metric_type</a>, [{:of, <a href="#t:t/0">t</a>}]) :: <a href="#t:t/0">t</a></pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Jump to the next value of a <code class="inline">type</code>. For example 
+<code class="inline">next(Kronos.day, of: Kronos.new({2017, 10, 10}, {22, 12, 12}))</code> give the 
+date : <code class="inline">2017-10-11, 0:0:0</code>.</p>
+<pre><code class="iex elixir">iex&gt; t = KronosTest.mock(:day, 2017, 10, 10)
+...&gt; Kronos.next(Kronos.day, of: t)
+KronosTest.mock(:day, 2017, 10, 11)</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="now/0">
+  
+  <div class="detail-header">
+    <a href="#now/0" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">now()</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L235" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>now() :: <a href="#t:t/0">t</a></pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Returns the current timestamp (in a <code class="inline">Kronos.t</code>)</p>
+
+  </section>
+</div>
+<div class="detail" id="overlap?/2">
+  
+  <div class="detail-header">
+    <a href="#overlap?/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">overlap?(a, list)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L216" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>overlap?(<a href="#t:duration/0">duration</a>, [{:with, <a href="#t:duration/0">duration</a>}]) :: boolean</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Checks that two durations have an intersection.</p>
+<pre><code class="iex elixir">iex&gt; durationA = KronosTest.mock(:duration, 2016, 2018)
+...&gt; durationB = KronosTest.mock(:duration, 2017, 2019)
+...&gt; Kronos.overlap?(durationA, with: durationB)
+true</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="pred/2">
+  
+  <div class="detail-header">
+    <a href="#pred/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">pred(t, list)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L419" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>pred(<a href="https://hexdocs.pm/mizur/1.0.1/Mizur.html#t:metric_type/0">Mizur.metric_type</a>, [{:of, <a href="#t:t/0">t</a>}]) :: <a href="#t:t/0">t</a></pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Jump to the pred value of a <code class="inline">type</code>. For example 
+<code class="inline">next(Kronos.day, of: Kronos.new({2017, 10, 10}, {22, 12, 12}))</code> give the 
+date : <code class="inline">2017-10-09, 0:0:0</code>.</p>
+<pre><code class="iex elixir">iex&gt; t = KronosTest.mock(:day, 2017, 10, 10)
+...&gt; Kronos.pred(Kronos.day, of: t)
+KronosTest.mock(:day, 2017, 10, 9)</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="second/0">
+  
+  <div class="detail-header">
+    <a href="#second/0" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">second()</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L72" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>References the subtype <code class="inline">second</code></p>
+
+  </section>
+</div>
+<div class="detail" id="second/1">
+  
+  <div class="detail-header">
+    <a href="#second/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">second(value)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L72" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Builds a value into the subtype <code class="inline">second</code></p>
+
+  </section>
+</div>
+<div class="detail" id="to_datetime/1">
+  
+  <div class="detail-header">
+    <a href="#to_datetime/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">to_datetime(timestamp)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L268" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>to_datetime(<a href="#t:t/0">t</a>) :: {:ok, <a href="https://hexdocs.pm/elixir/DateTime.html#t:t/0">DateTime.t</a>} | {:error, atom}</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Converts a <code class="inline">Kronos.t</code> to a <code class="inline">DateTime.t</code>, the result is wrapped 
+into <code class="inline">{:ok, value}</code> or <code class="inline">{:error, reason}</code>.</p>
+<pre><code class="iex elixir">iex&gt; ts = 1493119897
+...&gt; a  = Kronos.new!(ts)
+...&gt; b  = DateTime.from_unix(1493119897)
+...&gt; Kronos.to_datetime(a) == b 
+true</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="to_datetime!/1">
+  
+  <div class="detail-header">
+    <a href="#to_datetime!/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">to_datetime!(timestamp)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L285" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>to_datetime!(<a href="#t:t/0">t</a>) :: <a href="https://hexdocs.pm/elixir/DateTime.html#t:t/0">DateTime.t</a></pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Converts a <code class="inline">Kronos.t</code> to a <code class="inline">DateTime.t</code>. Raise an <a href="https://hexdocs.pm/elixir/ArgumentError.html"><code class="inline">ArgumentError</code></a> if 
+the timestamp is not valid.</p>
+<pre><code class="iex elixir">iex&gt; ts = 1493119897
+...&gt; a  = Kronos.new!(ts)
+...&gt; b  = DateTime.from_unix!(1493119897)
+...&gt; Kronos.to_datetime!(a) == b 
+true</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="to_integer/1">
+  
+  <div class="detail-header">
+    <a href="#to_integer/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">to_integer(timestamp)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L252" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>to_integer(<a href="#t:t/0">t</a>) :: integer</pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Returns the wrapped values (into a <code class="inline">Kronos.t</code>) as an 
+integer in <code class="inline">second</code>. This function is mainly used to convert 
+<code class="inline">Kronos.t</code> to<code class="inline">DateTime.t</code>.</p>
+<pre><code class="iex elixir">iex&gt; x = Kronos.new!(2000)
+...&gt; Kronos.to_integer(x)
+2000</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="to_string/1">
+  
+  <div class="detail-header">
+    <a href="#to_string/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">to_string(value)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L84" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>to_string(<a href="#t:t/0">t</a>) :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a></pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Convert a <code class="inline">Kronos.t</code> into a string, use the 
+<a href="https://hexdocs.pm/elixir/DateTime.html"><code class="inline">DateTime</code></a> inspect.</p>
+
+  </section>
+</div>
+<div class="detail" id="truncate/2">
+  
+  <div class="detail-header">
+    <a href="#truncate/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">truncate(timestamp, list)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L368" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+      <div class="specs">
+        
+          <pre>truncate(<a href="#t:t/0">t</a>, [{:at, <a href="https://hexdocs.pm/mizur/1.0.1/Mizur.html#t:metric_type/0">Mizur.metric_type</a>}]) :: <a href="#t:t/0">t</a></pre>
+        
+      </div>
+    
+  </div>
+  <section class="docstring">
+    <p>Rounds the given timestamp (<code class="inline">timestamp</code>) to the given type (<code class="inline">at</code>). </p>
+<pre><code class="iex elixir">iex&gt; ts = Kronos.new!({2017, 10, 24}, {23, 12, 07})
+...&gt; Kronos.truncate(ts, at: Kronos.hour())
+Kronos.new!({2017, 10, 24}, {23, 0, 0})</code></pre>
+<p>For example : </p>
+<ul>
+<li>truncate of 2017/10/24 23:12:07 at <code class="inline">minute</code> gives : 2017/10/24 23:12:00
+</li>
+<li>truncate of 2017/10/24 23:12:07 at <code class="inline">hour</code> gives : 2017/10/24 23:00:00
+</li>
+<li>truncate of 2017/10/24 23:12:07 at <code class="inline">day</code> gives : 2017/10/24 00:00:00
+</li>
+</ul>
+
+  </section>
+</div>
+<div class="detail" id="week/0">
+  
+  <div class="detail-header">
+    <a href="#week/0" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">week()</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L76" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>References the subtype <code class="inline">week</code></p>
+
+  </section>
+</div>
+<div class="detail" id="week/1">
+  
+  <div class="detail-header">
+    <a href="#week/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">week(value)</span>
+    
+      <a href="https://github.com/xvw/kronos/blob/master/lib/kronos.ex#L76" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Builds a value into the subtype <code class="inline">week</code></p>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.15.1),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle" />
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  <script src="dist/app-e9767fa739.js"></script>
+  </body>
+</html>
+
