@@ -105,10 +105,24 @@ defmodule Kronos do
   end
 
   @doc """
+  Returns a `Kronos.t` with the number of days in a month, 
+  the month is referenced by `year` and `month (non neg integer)`.
+
+      iex> Kronos.days_in(2004, 2)
+      Kronos.day(29)
+
+      iex> Kronos.days_in(2005, 2)
+      Kronos.day(28)
+
+      iex> Kronos.days_in(2005, 1)
+      Kronos.day(31)
+
+      iex> Kronos.days_in(2001, 4)
+      Kronos.day(30)
+
   """
   @spec days_in(non_neg_integer, 1..12) :: t
   def days_in(year, month), do: day(aux_days_in(year, month))
-  defp aux_days_in(year, month)
   defp aux_days_in(year, 2), do: (if (leap_year?(year)), do: 29, else: 28)
   defp aux_days_in(_, month) when month in [4, 6, 9, 11], do: 30
   defp aux_days_in(_, _), do: 31
