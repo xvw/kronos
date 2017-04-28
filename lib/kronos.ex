@@ -65,7 +65,6 @@ defmodule Kronos do
   @type day_of_week :: 
     :mon | :tue | :wed | :thu | :fri | :sat | :sun
 
-
   # Definition of the Metric-System
 
   use Mizur.System
@@ -88,6 +87,31 @@ defmodule Kronos do
       {:ok, datetime}  -> "#{datetime}"
     end
   end
+
+  @doc """
+  Returns if the given year is a leap year.
+
+      iex> Kronos.leap_year?(2004)
+      true 
+
+      iex> Kronos.leap_year?(2017)
+      false
+
+  """
+  @spec leap_year?(non_neg_integer) :: boolean 
+  def leap_year?(year) do 
+    rem(year, 4) === 0 
+      and (rem(year, 100) > 0 or rem(year, 400) === 0)
+  end
+
+  @doc """
+  """
+  @spec days_in(non_neg_integer, 1..12) :: t
+  def days_in(year, month), do: day(aux_days_in(year, month))
+  defp aux_days_in(year, month)
+  defp aux_days_in(year, 2), do: (if (leap_year?(year)), do: 29, else: 28)
+  defp aux_days_in(_, month) when month in [4, 6, 9, 11], do: 30
+  defp aux_days_in(_, _), do: 31
 
   @doc """
   Converts an integer (timestamp) to a `Kronos.result`
@@ -117,7 +141,9 @@ defmodule Kronos do
   Converts two tuple (date, time) to a `Kronos.result`
   """
   @spec new(non_neg_triplet, non_neg_triplet) :: result 
-  def new({_, _, _} = date, {_, _, _} = time), do: new({date, time})
+  def new({_, _, _} = date, {_, _, _} = time) do
+    new({date, time})
+  end
 
   @doc """
   Same of `Kronos.new/1` but raise an `ArgumentError` if the 
