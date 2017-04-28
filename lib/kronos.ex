@@ -16,6 +16,15 @@ defmodule Kronos do
   """
 
   @first_day_of_week 3
+  @days_of_week [
+    :mon, 
+    :tue, 
+    :wed, 
+    :thu, 
+    :fri, 
+    :sat, 
+    :sun
+  ]
 
 
   @typedoc """
@@ -49,6 +58,12 @@ defmodule Kronos do
   This type represents a failable result
   """
   @type result :: {:ok, t} | {:error, atom}
+
+  @typedoc """
+  This type represents the day of the week 
+  """
+  @type day_of_week :: 
+    :mon | :tue | :wed | :thu | :fri | :sat | :sun
 
 
   # Definition of the Metric-System
@@ -374,23 +389,24 @@ defmodule Kronos do
 
       iex> a = KronosTest.mock(:day, 1970, 1, 1, 12, 10, 11)
       ...> Kronos.day_of_week(a)
-      3
+      :thu
 
       iex> a = KronosTest.mock(:day, 2017, 4, 29, 0, 3, 11)
       ...> Kronos.day_of_week(a)
-      5
+      :sat
 
 
   """
-  @spec day_of_week(t) :: non_neg_integer
+  @spec day_of_week(t) :: day_of_week
   def day_of_week(ts) do 
-    ts
-    |> truncate(at: day())
-    |> Mizur.from(to: day())
-    |> Mizur.unwrap()
-    |> round()
-    |> Kernel.+(@first_day_of_week)
-    |> rem(7)
+    res = ts
+      |> truncate(at: day())
+      |> Mizur.from(to: day())
+      |> Mizur.unwrap()
+      |> round()
+      |> Kernel.+(@first_day_of_week)
+      |> rem(7)
+    Enum.at(@days_of_week, res)
   end
   
 
