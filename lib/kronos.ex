@@ -33,9 +33,14 @@ defmodule Kronos do
   @type t :: Mizur.typed_value
 
   @typedoc """
-  This type represent a specific week type
+  This type represents a specific week type
   """
   @type week_t :: {t, day_of_week}
+
+  @typedoc """
+  This type represents a metric_type
+  """
+  @type metric :: Mizur.metric_type | week_t
   
   @typedoc """
   This type represents a range between two timestamp
@@ -337,7 +342,7 @@ defmodule Kronos do
   (By passing a `precision`, both parameters will be truncated via 
   `Kronos.truncate/2`).
   """
-  @spec after?(t, t, Mizur.metric_type) :: boolean
+  @spec after?(t, t, metric) :: boolean
   def after?(a, b, precision \\ second()) do 
     use Mizur.Infix, only: [>: 2]
     truncate(a, at: precision) > truncate(b, at: precision)
@@ -354,7 +359,7 @@ defmodule Kronos do
   (By passing a `precision`, both parameters will be truncated via 
   `Kronos.truncate/2`).
   """
-  @spec before?(t, t, Mizur.metric_type) :: boolean
+  @spec before?(t, t, metric) :: boolean
   def before?(a, b, precision \\ second()) do 
     use Mizur.Infix, only: [<: 2]
     truncate(a, at: precision) < truncate(b, at: precision)
@@ -372,7 +377,7 @@ defmodule Kronos do
   (By passing a `precision`, both parameters will be truncated via 
   `Kronos.truncate/2`).
   """
-  @spec equivalent?(t, t, Mizur.metric_type) :: boolean
+  @spec equivalent?(t, t, metric) :: boolean
   def equivalent?(a, b, precision \\ second()) do 
     use Mizur.Infix, only: [==: 2]
     truncate(a, at: precision) == truncate(b, at: precision)
@@ -392,7 +397,7 @@ defmodule Kronos do
   -  truncate of 2017/10/24 23:12:07 at `day` gives : 2017/10/24 00:00:00
 
   """
-  @spec truncate(t, [at: (Mizur.metric_type | week_t)]) :: t
+  @spec truncate(t, [at: metric]) :: t
 
   def truncate(timestamp, at: {_, dow}) do
     ts = truncate(timestamp, at: day()) 
@@ -433,7 +438,7 @@ defmodule Kronos do
       ...> Kronos.next(Kronos.day, of: t)
       KronosTest.mock(:day, 2017, 10, 11)
   """
-  @spec next(Mizur.metric_type, [of: t]) :: t
+  @spec next(metric, [of: t]) :: t
   def next({mod, n, _, _, _} = t, of: ts) do 
     one = apply(mod, n, [1])
     Mizur.add(ts, one)
@@ -450,7 +455,7 @@ defmodule Kronos do
       ...> Kronos.pred(Kronos.day, of: t)
       KronosTest.mock(:day, 2017, 10, 9)
   """
-  @spec pred(Mizur.metric_type, [of: t]) :: t
+  @spec pred(metric, [of: t]) :: t
   def pred({mod, n, _, _, _} = t, of: ts) do 
     one = apply(mod, n, [1])
     Mizur.sub(ts, one)

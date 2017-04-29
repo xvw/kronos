@@ -86,5 +86,17 @@ defmodule KronosTest do
     assert Kronos.day_of_week(g) == :thu
   end
   
+  test "specific truncate" do 
+    assert false
+  end
+
+  test "next and pred" do 
+    assert false
+  end
+  
+  test "next and pred with negative timestamp" do 
+    assert false
+  end
+  
 
 end
