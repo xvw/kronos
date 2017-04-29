@@ -474,13 +474,15 @@ defmodule Kronos do
   """
   @spec day_of_week_internal(t) :: 0..6
   def day_of_week_internal(ts) do 
+    factor = if (Mizur.unwrap(ts) < 0), do: -1, else: 1
+    f = fn(x, y) -> (x*factor) + y end
     ts
     |> truncate(at: day())
     |> Mizur.from(to: day())
     |> Mizur.unwrap()
     |> round()
-    |> Kernel.+(@first_day_of_week)
-    |> rem(7)
+    |> f.(@first_day_of_week)
+    |> modulo(7)
   end
 
   @doc """ 

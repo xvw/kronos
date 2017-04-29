@@ -66,6 +66,25 @@ defmodule KronosTest do
     assert Kronos.day_of_week(f) == :tue
     assert Kronos.day_of_week(g) == :thu
   end
+
+  test "Days with negative timestamp" do 
+
+    a = mock(:day, 1907, 5, 4)
+    b = mock(:day, 1907, 6, 10)
+    c = mock(:day, 1907, 2, 17)
+    d = mock(:day, 1907, 3, 22)
+    e = mock(:day, 1911, 5, 10)
+    f = mock(:day, 1911, 6, 6)
+    g = mock(:day, 1911, 4, 27)
+    
+    assert Kronos.day_of_week(a) == :sat
+    assert Kronos.day_of_week(b) == :mon
+    assert Kronos.day_of_week(c) == :sun
+    assert Kronos.day_of_week(d) == :fri
+    assert Kronos.day_of_week(e) == :wed
+    assert Kronos.day_of_week(f) == :tue
+    assert Kronos.day_of_week(g) == :thu
+  end
   
 
 end
