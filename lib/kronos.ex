@@ -428,6 +428,31 @@ defmodule Kronos do
   0 for Monday, 6 for Sunday.
 
       iex> a = KronosTest.mock(:day, 1970, 1, 1, 12, 10, 11)
+      ...> Kronos.day_of_week_internal(a)
+      3
+
+      iex> a = KronosTest.mock(:day, 2017, 4, 29, 0, 3, 11)
+      ...> Kronos.day_of_week_internal(a)
+      5
+
+
+  """
+  @spec day_of_week_internal(t) :: 0..6
+  def day_of_week_internal(ts) do 
+    ts
+    |> truncate(at: day())
+    |> Mizur.from(to: day())
+    |> Mizur.unwrap()
+    |> round()
+    |> Kernel.+(@first_day_of_week)
+    |> rem(7)
+  end
+
+  @doc """ 
+  Returns the day of the week from a `Kronos.t`. 
+  0 for Monday, 6 for Sunday.
+
+      iex> a = KronosTest.mock(:day, 1970, 1, 1, 12, 10, 11)
       ...> Kronos.day_of_week(a)
       :thu
 
@@ -438,14 +463,8 @@ defmodule Kronos do
 
   """
   @spec day_of_week(t) :: day_of_week
-  def day_of_week(ts) do 
-    res = ts
-      |> truncate(at: day())
-      |> Mizur.from(to: day())
-      |> Mizur.unwrap()
-      |> round()
-      |> Kernel.+(@first_day_of_week)
-      |> rem(7)
+  def day_of_week(ts) do
+    res = day_of_week_internal(ts)
     Enum.at(@days_of_week, res)
   end
   
