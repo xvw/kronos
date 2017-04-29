@@ -31,6 +31,11 @@ defmodule Kronos do
   This type represents a typed timestamp
   """
   @type t :: Mizur.typed_value
+
+  @typedoc """
+  This type represent a specific week type
+  """
+  @type week_t :: {t, day_of_week}
   
   @typedoc """
   This type represents a range between two timestamp
@@ -65,7 +70,30 @@ defmodule Kronos do
   @type day_of_week :: 
     :mon | :tue | :wed | :thu | :fri | :sat | :sun
 
+  # Internals helpers
+
+  defp int_to_dow(i), do: Enum.at(@days_of_week, i)
+  defp dow_to_int(d) do 
+    Enum.find_index(
+      @days_of_week, 
+      fn(x) -> x == d end
+    )
+  end
+
+  defp modulo(a, b) do 
+    cond do 
+      a >= 0 -> rem(a, b)
+      true -> b - 1 - rem(-a-1, b)
+    end 
+  end 
+
   # Definition of the Metric-System
+
+  @doc """
+  Monkeypatch to truncate `Kronos.t`.
+  """
+  @spec week([start: day_of_week]) :: week_t
+  def week(start: day), do: {week(), day}
 
   use Mizur.System
 
@@ -364,7 +392,14 @@ defmodule Kronos do
   -  truncate of 2017/10/24 23:12:07 at `day` gives : 2017/10/24 00:00:00
 
   """
-  @spec truncate(t, [at: Mizur.metric_type]) :: t
+  @spec truncate(t, [at: (Mizur.metric_type | week_t)]) :: t
+
+  def truncate(timestamp, at: {_, dow}) do
+    ts = truncate(timestamp, at: day()) 
+    f = modulo(day_of_week_internal(ts) - dow_to_int(dow), 7)
+    Mizur.sub(ts, day(f))
+  end
+
   def truncate({base, _} = timestamp, at: {__MODULE__, unit, _, _, _} = _type) do 
     seconds = to_integer(timestamp)
     factor  = to_integer(apply(__MODULE__, unit, [1]))
@@ -464,8 +499,8 @@ defmodule Kronos do
   """
   @spec day_of_week(t) :: day_of_week
   def day_of_week(ts) do
-    res = day_of_week_internal(ts)
-    Enum.at(@days_of_week, res)
+    day_of_week_internal(ts)
+    |> int_to_dow()
   end
   
 
