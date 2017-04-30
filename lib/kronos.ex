@@ -77,6 +77,9 @@ defmodule Kronos do
 
   # Internals helpers
 
+  def one({mod, unit, _, _, _}), do: apply(mod, unit, [1])
+  def one({t, _}), do: one(t)
+
   defp int_to_dow(i), do: Enum.at(@days_of_week, i)
   defp dow_to_int(d) do 
     Enum.find_index(
@@ -90,7 +93,7 @@ defmodule Kronos do
       a >= 0 -> rem(a, b)
       true -> b - 1 - rem(-a-1, b)
     end 
-  end 
+  end
 
   # Definition of the Metric-System
 
@@ -439,9 +442,8 @@ defmodule Kronos do
       KronosTest.mock(:day, 2017, 10, 11)
   """
   @spec next(metric, [of: t]) :: t
-  def next({mod, n, _, _, _} = t, of: ts) do 
-    one = apply(mod, n, [1])
-    Mizur.add(ts, one)
+  def next(t, of: ts) do 
+    Mizur.add(ts, one(t))
     |> truncate(at: t)
   end
 
@@ -456,9 +458,8 @@ defmodule Kronos do
       KronosTest.mock(:day, 2017, 10, 9)
   """
   @spec pred(metric, [of: t]) :: t
-  def pred({mod, n, _, _, _} = t, of: ts) do 
-    one = apply(mod, n, [1])
-    Mizur.sub(ts, one)
+  def pred(t, of: ts) do 
+    Mizur.sub(ts, one(t))
     |> truncate(at: t)
   end
 
