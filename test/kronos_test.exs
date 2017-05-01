@@ -129,6 +129,14 @@ defmodule KronosTest do
     assert Kronos.truncate(a, at: Kronos.week(start: :sun)) == mock(:day, 2017, 1, 1)
     assert Kronos.truncate(a, at: Kronos.week(start: :sat)) == mock(:day, 2016, 12, 31)
   end
+
+  test "truncate for week 4!" do 
+    a = mock(:day, 1951, 12, 6)
+    assert Kronos.truncate(a, at: Kronos.week) == mock(:day, 1951, 12, 3)
+    assert Kronos.truncate(a, at: Kronos.week(start: :sun)) == mock(:day, 1951, 12, 2)
+    assert Kronos.truncate(a, at: Kronos.week(start: :sat)) == mock(:day, 1951, 12, 1)
+  end
+  
   
 
   test "For Day of week" do 
@@ -178,17 +186,34 @@ defmodule KronosTest do
     assert bf == mock(:day, 2016, 1, 24)
   end
 
-  test "next" do 
+  test "next 1" do 
     a = mock(:day, 2016, 2, 4, 13, 28, 47)
     af = Kronos.next(Kronos.day(), of: a)
     assert af == mock(:day, 2016, 2, 5)
   end
 
-  test "pred" do 
+  test "pred 1" do 
     a = mock(:day, 2016, 2, 4, 13, 28, 47)
     af = Kronos.pred(Kronos.day(), of: a)
     assert af == mock(:day, 2016, 2, 3)
   end
+
+  test "next 2" do 
+    a = mock(:day, 1951, 12, 6)
+    af = Kronos.next(Kronos.week, of: a)
+    ab = Kronos.next(Kronos.week(start: :sun), of: a)
+    assert af == mock(:day, 1951, 12, 10)
+    assert ab == mock(:day, 1951, 12, 9)
+  end
+
+  test "pred 2" do 
+    a = mock(:day, 1951, 12, 6)
+    af = Kronos.pred(Kronos.week, of: a)
+    ab = Kronos.pred(Kronos.week(start: :sun), of: a)
+    assert af == mock(:day, 1951, 11, 26)
+    assert ab == mock(:day, 1951, 11, 25)
+  end
+  
   
   
 
