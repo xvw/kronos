@@ -91,11 +91,11 @@ defmodule KronosTest do
   end
 
   test "next and pred" do 
-    IO.inspect(Kronos.one(Kronos.week(start: :mon)))
-    #a = mock(:day, 2016, 2, 4)
-    #af = Kronos.next(a, of: Kronos.week(start: :mon))
-    #IO.inspect af
-    #assert af == mock(:day, 2016, 2, 1)
+    a = mock(:day, 2016, 2, 4)
+    af = Kronos.next(Kronos.week(start: :mon), of: a)
+    bf = Kronos.pred(Kronos.week(start: :sun), of: a)
+    assert af == mock(:day, 2016, 2, 8)
+    assert bf == mock(:day, 2016, 1, 24)
   end
   
   test "next and pred with negative timestamp" do 

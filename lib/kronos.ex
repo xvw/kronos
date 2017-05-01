@@ -442,7 +442,7 @@ defmodule Kronos do
       KronosTest.mock(:day, 2017, 10, 11)
   """
   @spec next(metric, [of: t]) :: t
-  def next(t, of: ts) do 
+  def next(t, of: ts) do
     Mizur.add(ts, one(t))
     |> truncate(at: t)
   end
