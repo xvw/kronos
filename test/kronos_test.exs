@@ -47,6 +47,68 @@ defmodule KronosTest do
 
   end
 
+  test "for truncate" do 
+    a = mock(:day, 2017, 5, 6, 20, 12, 10)
+    b = mock(:day, 2017, 2, 13, 17, 25, 59)
+    c = mock(:day, 2002, 9, 15, 1, 2, 3)
+    d = mock(:day, 1970, 1, 1)
+
+
+    assert Kronos.truncate(a, at: Kronos.minute) == mock(:day, 2017, 5, 6, 20, 12, 0)
+    assert Kronos.truncate(a, at: Kronos.hour) == mock(:day, 2017, 5, 6, 20, 0, 0)
+    assert Kronos.truncate(a, at: Kronos.day) == mock(:day, 2017, 5, 6)
+    assert Kronos.truncate(a, at: Kronos.second) == a
+
+    assert Kronos.truncate(b, at: Kronos.minute) == mock(:day, 2017, 2, 13, 17, 25, 0)
+    assert Kronos.truncate(b, at: Kronos.second) == b
+    assert Kronos.truncate(b, at: Kronos.hour) == mock(:day, 2017, 2, 13, 17, 0, 0)
+    assert Kronos.truncate(b, at: Kronos.day) == mock(:day, 2017, 2, 13)
+
+    assert Kronos.truncate(c, at: Kronos.minute) == mock(:day, 2002, 9, 15, 1, 2, 0)
+    assert Kronos.truncate(c, at: Kronos.second) == c
+    assert Kronos.truncate(c, at: Kronos.hour) == mock(:day, 2002, 9, 15, 1, 0, 0)
+    assert Kronos.truncate(c, at: Kronos.day) == mock(:day, 2002, 9, 15)
+
+    assert Kronos.truncate(d, at: Kronos.minute) == d
+    assert Kronos.truncate(d, at: Kronos.second) == d
+    assert Kronos.truncate(d, at: Kronos.hour) == d
+    assert Kronos.truncate(d, at: Kronos.day) == d
+
+  end
+
+
+  test "for truncate negative ts" do 
+    a = mock(:day, 1908, 5, 6, 20, 12, 10)
+    b = mock(:day, 1907, 2, 13, 17, 25, 59)
+    c = mock(:day, 1958, 9, 15, 1, 2, 3)
+    d = mock(:day, 1965, 1, 1)
+
+
+    assert Kronos.truncate(a, at: Kronos.minute) == mock(:day, 1908, 5, 6, 20, 12, 0)
+    assert Kronos.truncate(a, at: Kronos.hour) == mock(:day, 1908, 5, 6, 20, 0, 0)
+    assert Kronos.truncate(a, at: Kronos.day) == mock(:day, 1908, 5, 6)
+
+    assert Kronos.truncate(b, at: Kronos.minute) == mock(:day, 1907, 2, 13, 17, 25, 0)
+    assert Kronos.truncate(b, at: Kronos.hour) == mock(:day, 1907, 2, 13, 17, 0, 0)
+    assert Kronos.truncate(b, at: Kronos.day) == mock(:day, 1907, 2, 13)
+
+    assert Kronos.truncate(c, at: Kronos.minute) == mock(:day, 1958, 9, 15, 1, 2, 0)
+    assert Kronos.truncate(c, at: Kronos.hour) == mock(:day, 1958, 9, 15, 1, 0, 0)
+    assert Kronos.truncate(c, at: Kronos.day) == mock(:day, 1958, 9, 15)
+
+
+    assert Kronos.truncate(a, at: Kronos.second) == a
+    assert Kronos.truncate(b, at: Kronos.second) == b
+    assert Kronos.truncate(c, at: Kronos.second) == c
+
+    assert Kronos.truncate(d, at: Kronos.second) == d
+    assert Kronos.truncate(d, at: Kronos.minute) == d
+    assert Kronos.truncate(d, at: Kronos.hour) == d
+    assert Kronos.truncate(d, at: Kronos.day) == d
+
+
+  end
+  
 
   test "For Day of week" do 
 
@@ -90,17 +152,26 @@ defmodule KronosTest do
     #assert false
   end
 
-  test "next and pred" do 
+  test "next & pred 1" do 
     a = mock(:day, 2016, 2, 4)
     af = Kronos.next(Kronos.week(start: :mon), of: a)
     bf = Kronos.pred(Kronos.week(start: :sun), of: a)
     assert af == mock(:day, 2016, 2, 8)
     assert bf == mock(:day, 2016, 1, 24)
   end
-  
-  test "next and pred with negative timestamp" do 
-    #assert false
+
+  test "next" do 
+    a = mock(:day, 2016, 2, 4, 13, 28, 47)
+    af = Kronos.next(Kronos.day(), of: a)
+    assert af == mock(:day, 2016, 2, 5)
   end
+
+  test "pred" do 
+    a = mock(:day, 2016, 2, 4, 13, 28, 47)
+    af = Kronos.pred(Kronos.day(), of: a)
+    assert af == mock(:day, 2016, 2, 3)
+  end
+  
   
 
 end

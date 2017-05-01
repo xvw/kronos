@@ -95,6 +95,9 @@ defmodule Kronos do
     end 
   end
 
+  defp second?({_, :second, _, _, _}), do: true 
+  defp second?(_), do: false
+
   # Definition of the Metric-System
 
   @doc """
@@ -408,13 +411,16 @@ defmodule Kronos do
     Mizur.sub(ts, day(f))
   end
 
-  def truncate({base, _} = timestamp, at: {__MODULE__, unit, _, _, _} = _type) do 
-    seconds = to_integer(timestamp)
-    factor  = to_integer(apply(__MODULE__, unit, [1]))
-    f = if (seconds >= 0), do: 0, else: factor
-    (seconds - rem(seconds, factor) - f)
-    |> second() 
-    |> Mizur.from(to: base)
+  def truncate({base, _} = timestamp, at: t) do 
+    cond do 
+      second?(t) -> timestamp
+      true ->
+        seconds = to_integer(timestamp)
+        factor  = to_integer(one(t))
+        (seconds - modulo(seconds, factor))
+        |> second() 
+        |> Mizur.from(to: base)
+      end 
   end
 
 
@@ -480,14 +486,12 @@ defmodule Kronos do
   """
   @spec day_of_week_internal(t) :: 0..6
   def day_of_week_internal(ts) do 
-    factor = if (Mizur.unwrap(ts) < 0), do: 1, else: 0
-    f = fn(x, y) -> (x+factor) + y end
     ts
     |> truncate(at: day())
     |> Mizur.from(to: day())
     |> Mizur.unwrap()
     |> round()
-    |> f.(@first_day_of_week)
+    |> Kernel.+(@first_day_of_week)
     |> modulo(7)
   end
 
