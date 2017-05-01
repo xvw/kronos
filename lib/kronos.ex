@@ -98,6 +98,9 @@ defmodule Kronos do
   defp second?({_, :second, _, _, _}), do: true 
   defp second?(_), do: false
 
+  defp simple_week?({_, :week, _, _, _}), do: true 
+  defp simple_week?(_), do: false
+
   # Definition of the Metric-System
 
   @doc """
@@ -414,6 +417,7 @@ defmodule Kronos do
   def truncate({base, _} = timestamp, at: t) do 
     cond do 
       second?(t) -> timestamp
+      simple_week?(t) -> truncate(timestamp, at: week(start: :mon))
       true ->
         seconds = to_integer(timestamp)
         factor  = to_integer(one(t))

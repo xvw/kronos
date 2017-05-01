@@ -108,6 +108,10 @@ defmodule KronosTest do
 
 
   end
+
+  test "truncate for week !" do 
+
+  end
   
 
   test "For Day of week" do 
@@ -148,9 +152,6 @@ defmodule KronosTest do
     assert Kronos.day_of_week(g) == :thu
   end
   
-  test "specific truncate" do 
-    #assert false
-  end
 
   test "next & pred 1" do 
     a = mock(:day, 2016, 2, 4)
