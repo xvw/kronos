@@ -109,8 +109,25 @@ defmodule KronosTest do
 
   end
 
-  test "truncate for week !" do 
+  test "truncate for week 1!" do 
+    a = mock(:day, 2017, 10, 4, 22, 12, 32)
+    assert Kronos.truncate(a, at: Kronos.week) == mock(:day, 2017, 10, 2)
+    assert Kronos.truncate(a, at: Kronos.week(start: :sun)) == mock(:day, 2017, 10, 1)
+    assert Kronos.truncate(a, at: Kronos.week(start: :sat)) == mock(:day, 2017, 9, 30)
+  end
 
+  test "truncate for week 2!" do 
+    a = mock(:day, 2017, 1, 6, 23, 59, 59)
+    assert Kronos.truncate(a, at: Kronos.week) == mock(:day, 2017, 1, 2)
+    assert Kronos.truncate(a, at: Kronos.week(start: :sun)) == mock(:day, 2017, 1, 1)
+    assert Kronos.truncate(a, at: Kronos.week(start: :sat)) == mock(:day, 2016, 12, 31)
+  end
+
+  test "truncate for week 3!" do 
+    a = mock(:day, 2017, 1, 6)
+    assert Kronos.truncate(a, at: Kronos.week) == mock(:day, 2017, 1, 2)
+    assert Kronos.truncate(a, at: Kronos.week(start: :sun)) == mock(:day, 2017, 1, 1)
+    assert Kronos.truncate(a, at: Kronos.week(start: :sat)) == mock(:day, 2016, 12, 31)
   end
   
 
