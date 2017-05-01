@@ -518,7 +518,63 @@ defmodule Kronos do
     day_of_week_internal(ts)
     |> int_to_dow()
   end
-  
+
+
+  @doc """
+  Returns the seconds (relatives) of a timestamp.
+
+      iex> a = KronosTest.mock(:day, 2017, 10, 10, 23, 45, 53)
+      ...> Kronos.seconds_of(a)
+      53
+
+      iex> a = KronosTest.mock(:day, 1903, 10, 10, 13, 22, 7)
+      ...> Kronos.seconds_of(a)
+      7
+  """
+  @spec seconds_of(t) :: integer 
+  def seconds_of(timestamp) do 
+    modulo(to_integer(timestamp), 60)
+  end
+
+  @doc """
+  Returns the minutes (relatives) of a timestamp.
+
+      iex> a = KronosTest.mock(:day, 2017, 10, 10, 23, 45, 53)
+      ...> Kronos.minutes_of(a)
+      45
+
+      iex> a = KronosTest.mock(:day, 1903, 10, 10, 13, 22, 7)
+      ...> Kronos.minutes_of(a)
+      22
+  """
+  @spec minutes_of(t) :: integer 
+  def minutes_of(timestamp) do 
+    timestamp
+    |> truncate(at: minute())
+    |> to_integer()
+    |> Kernel.div(60)
+    |> modulo(60)
+  end
+
+  @doc """
+  Returns the hours (relatives) of a timestamp.
+
+      iex> a = KronosTest.mock(:day, 2017, 10, 10, 23, 45, 53)
+      ...> Kronos.hours_of(a)
+      23
+
+      iex> a = KronosTest.mock(:day, 1903, 10, 10, 13, 22, 7)
+      ...> Kronos.hours_of(a)
+      13
+  """
+  @spec hours_of(t) :: integer 
+  def hours_of(timestamp) do 
+    timestamp
+    |> truncate(at: hour())
+    |> to_integer()
+    |> Kernel.div(3600)
+    |> modulo(24)
+  end  
 
 
 end
