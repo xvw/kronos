@@ -8,7 +8,7 @@ defmodule Kronos do
       iex> import Kronos
       ...> use Kronos.Infix
       ...> {:ok, t} = new({2010, 12, 20}, {0, 0, 0})
-      ...> r = t + day(2) + hour(3) + minute(10) + second(13)
+      ...> r = t + ~t(2)day + ~t(3)hour + ~t(10)minute + ~t(13)second
       ...> Kronos.to_string(r)
       "2010-12-22 03:10:13Z"
 
@@ -73,7 +73,13 @@ defmodule Kronos do
   This type represents the day of the week 
   """
   @type day_of_week :: 
-    :mon | :tue | :wed | :thu | :fri | :sat | :sun
+      :mon 
+    | :tue 
+    | :wed 
+    | :thu 
+    | :fri 
+    | :sat 
+    | :sun
 
   # Internals helpers
 
@@ -112,10 +118,16 @@ defmodule Kronos do
   use Mizur.System
 
   type second
-  type minute = 60 * second
-  type hour   = 60 * 60 * second
-  type day    = 24 * 60 * 60 * second
-  type week   = 7 * 24 * 60 * 60 * second
+  
+  type minute          = 60 * second
+  type fifteen_minutes = 15 * 60 * second
+  type half_hour       = 30 * 60 * second
+  type hour            = 60 * 60 * second
+  type day             = 24 * 60 * 60 * second
+  type week            = 7 * 24 * 60 * 60 * second
+
+  type month           = 30 * 24 * 60 * 60 * second
+  type year            = 365 * 24 * 60 * 60 * second
 
 
   @doc """
@@ -574,7 +586,7 @@ defmodule Kronos do
     |> to_integer()
     |> Kernel.div(3600)
     |> modulo(24)
-  end  
+  end
 
 
 end
