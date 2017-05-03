@@ -12,6 +12,27 @@ defmodule Kronos do
       ...> Kronos.to_string(r)
       "2010-12-22 03:10:13Z"
 
+  The measures references are :
+
+  -  `Kronos.second`
+  -  `Kronos.minute`
+  -  `Kronos.second`
+  -  `Kronos.fifteen_minutes`
+  -  `Kronos.half_hour`
+  -  `Kronos.hour`
+  -  `Kronos.half_day`
+  -  `Kronos.day`
+  -  `Kronos.week`
+  -  `Kronos.month` **This measure is an approximation (30 days)**
+  -  `Kronos.year` **This measure is an approximation (365 days)**
+
+
+  ## Unsafe values 
+
+  `Kronos.month` and `Kronos.year` are unsafe, they represents a "approximation"
+  of a month or a year. You should never use it with `Kronos.truncate/2`, 
+  `Kronos.next/2` and `Kronos.pred/2` (and of course as a `precision flag`).
+
 
   """
 
@@ -118,11 +139,12 @@ defmodule Kronos do
   use Mizur.System
 
   type second
-  
+
   type minute          = 60 * second
   type fifteen_minutes = 15 * 60 * second
   type half_hour       = 30 * 60 * second
   type hour            = 60 * 60 * second
+  type half_day        = 12 * 60 * 60 * second
   type day             = 24 * 60 * 60 * second
   type week            = 7 * 24 * 60 * 60 * second
 
