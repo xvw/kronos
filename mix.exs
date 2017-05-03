@@ -27,7 +27,7 @@ defmodule Kronos.Mixfile do
 
   defp package do
     [
-     name: :mizur,
+     name: :kronos,
      files: ["lib", "mix.exs", "README*", "LICENSE*"],
      maintainers: ["Xavier Van de Woestyne"],
      licenses: ["MIT"],
