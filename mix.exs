@@ -10,8 +10,16 @@ defmodule Kronos.Mixfile do
       start_permanent: Mix.env == :prod,
       name: "Kronos",
       source_url: "https://github.com/xvw/kronos",
-      homepage_url: "https://github.com/xvw/kronos",
-      deps: deps()
+      homepage_url: "https://github.com/xvw/kronos/doc",
+      deps: deps(),
+      docs: docs()
+    ]
+  end
+
+  # configuration of the documentation 
+  def docs do 
+    [
+      
     ]
   end
 
