@@ -1,6 +1,5 @@
 # Kronos
 
-**TODO: Add description**
 
 ## Installation
 
@@ -9,7 +8,7 @@ by adding `kronos` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
-  [{:kronos, "~> 0.1.0"}]
+  [{:kronos, "~> 1.0.0"}]
 end
 ```
 
