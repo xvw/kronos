@@ -1,6 +1,3 @@
-> This library is Work in progress
-
-
 # Kronos
 
 **TODO: Add description**
