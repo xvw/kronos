@@ -12,9 +12,28 @@ defmodule Kronos.Mixfile do
       source_url: "https://github.com/xvw/kronos",
       homepage_url: "https://github.com/xvw/kronos/doc",
       deps: deps(),
+      package: package(),
+      description: description(),
       docs: docs()
     ]
   end
+
+  defp description do 
+    """
+    Kronos is a library to facilitate simple arithmetic operations between timestamps.
+    This library is based on Mizur to type values.
+    """
+  end
+
+  defp package do
+    [
+     name: :mizur,
+     files: ["lib", "mix.exs", "README*", "LICENSE*"],
+     maintainers: ["Xavier Van de Woestyne"],
+     licenses: ["MIT"],
+     links: %{"GitHub" => "https://github.com/xvw/kronos",
+              "Docs" => "http://xvw.github.io/kronos/doc/readme.html"}]
+end
 
   # configuration of the documentation 
   def docs do 
